@@ -3,15 +3,16 @@
  * main - A function that run shell commands
  * @ac: number on input arguments
  * @av: array of strings that contains arguements
+ * @env: an array of string contains the enviroement
  * Return: 0 on success
  */
 int main(int ac, char **av, char **env)
 {
-		char *buffer = NULL;
+		char *buffer = NULL, **tokens = NULL;
 		size_t size_buf = 0;
 		int byte_readed = 0,  status;
 		pid_t pid;
-		int i = 0;
+		(void)ac;
 
 		while (1)
 		{
@@ -19,25 +20,14 @@ int main(int ac, char **av, char **env)
 				write(1, "HELL_SHELL>> ", 13);
 			byte_readed = getline(&buffer, &size_buf, stdin);
 			if (byte_readed == EOF)
-			{
-				if (buffer)
-				{
-					free(buffer);
-					buffer = NULL;
-				}
-				if (isatty(STDIN_FILENO))
-					write(1, "\n", 1);
-				free(buffer);
-				exit(0);
-			}
+				handle_EOF(buffer);
 			else if (*buffer == '\n')
 				free(buffer);
 			else
 			{
 				buffer[strlen(buffer) - 1] = '\0';
-				char **tokens = split_buffer(buffer);
+				tokens = split_buffer(buffer);
 
-				free(buffer);
 				pid = fork();
 				if (pid == 0)
 				{
@@ -49,7 +39,6 @@ int main(int ac, char **av, char **env)
 				}
 				else
 					wait(&status);
-				i = 0;
 				free(tokens);
 			}
 		}
