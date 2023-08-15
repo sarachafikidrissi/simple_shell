@@ -11,11 +11,11 @@ char **split_buffer(char *buffer)
 	int i = 0;
 
 	tokens = malloc(sizeof(char *) * 1024);
-	token = strtok(buffer, " \0");
+	token = strtok(buffer, " \t\n");
 	while (token != NULL)
 	{
 		tokens[i] = token;
-		token = strtok(NULL, " \0");
+		token = strtok(NULL, " \t\n");
 		i++;
 	}
 	tokens[i] = NULL;
