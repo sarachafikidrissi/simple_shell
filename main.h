@@ -7,6 +7,10 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+struct stat st;
+extern char **environ;
+
+void execute(char *buffer, char **env);
 
 /*======== shell.c =======*/
 int main(int ac, char **av, char **env);

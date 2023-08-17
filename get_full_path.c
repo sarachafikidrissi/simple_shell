@@ -9,7 +9,6 @@ char *get_full_path(char *input)
 		char *full_path;
 		char *token;
 		struct stat st;
-		int i = 0;
 
 		char *path = get_env("PATH");
 
@@ -17,14 +16,14 @@ char *get_full_path(char *input)
 
 		while (token)
 		{
-				full_path = malloc(strlen(input) + strlen(path) + 2);
-				strcpy(full_path, token);
-				strcat(full_path, "/");
-				strcat(full_path, input);
-				if (stat(full_path, &st) == 0)
-						return (full_path);
-				free(full_path);
-				token = strtok(NULL, ":");
+			full_path = malloc(strlen(input) + strlen(path) + 2);
+			strcpy(full_path, token);
+			strcat(full_path, "/");
+			strcat(full_path, input);
+			if (stat(full_path, &st) == 0)
+				return (full_path);
+			free(full_path);
+			token = strtok(NULL, ":");
 		}
 		return (NULL);
 }
