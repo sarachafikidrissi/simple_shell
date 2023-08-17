@@ -16,6 +16,11 @@ void execute(char *buffer, char **env)
 	buffer[_strlen(buffer) - 1] = '\0';
 	tokens = split_buffer(buffer);
 
+	if (_strcmp(tokens[0], "exit") != 0)
+		exit_shell(tokens);
+	if (_strcmp(tokens[0], "env") != 0)
+		print_env(env);
+
 	pid = fork();
 	if (pid == 0)
 	{
