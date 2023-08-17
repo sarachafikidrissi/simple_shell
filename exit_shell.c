@@ -7,7 +7,7 @@
 void exit_shell(char **tokens)
 {
 	int status = 0;
-	
+
 	if (tokens[1] == NULL)
 	{
 		free_command(tokens);

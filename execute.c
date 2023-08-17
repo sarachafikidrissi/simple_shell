@@ -1,26 +1,20 @@
 #include "main.h"
-
 /**
  * execute - execution of the command.
  * @buffer:  pointer to a string.
  * @env: double pointer to an array of env.
  */
-
 void execute(char *buffer, char **env)
 {
-	char **tokens = NULL;
-	char *full_path;
-	pid_t pid;
-	int status = 0;
+	char **tokens = NULL, *full_path;
+	int status = 0, pid;
 
 	buffer[_strlen(buffer) - 1] = '\0';
 	tokens = split_buffer(buffer);
-
 	if (_strcmp(tokens[0], "exit") != 0)
 		exit_shell(tokens);
 	if (_strcmp(tokens[0], "env") != 0)
 		print_env(env);
-
 	pid = fork();
 	if (pid == 0)
 	{
@@ -45,11 +39,11 @@ void execute(char *buffer, char **env)
 				}
 			}
 			else
-			printf("%s: not found\n", tokens[0]);
+				printf("%s: not found\n", tokens[0]);
 			exit(0);
 		}
 	}
 	else
-	wait(&status);
+		wait(&status);
 	free(tokens);
 }
