@@ -9,10 +9,12 @@
 int main(int ac, char **av, char **env)
 {
 		char *buffer = NULL, **tokens = NULL;
+		char *full_path;
 		size_t size_buf = 0;
 		int byte_readed = 0,  status;
 		pid_t pid;
 		(void)ac;
+		struct stat st;
 
 		while (1)
 		{
@@ -31,16 +33,37 @@ int main(int ac, char **av, char **env)
 				pid = fork();
 				if (pid == 0)
 				{
-					if (execve(tokens[0], tokens, env) == -1)
+					if (stat(tokens[0], &st) == 0)
 					{
-						printf("%s: No such file or directory\n", av[0]);
-						exit(EXIT_FAILURE);
+						if (execve(tokens[0], tokens, env) == -1)
+						{
+							perror(tokens[0]);
+							free_exit(tokens);
+						}
+					}
+					else
+					{
+						full_path = get_full_path(tokens[0]);
+						if (full_path)
+						{
+							if (execve(full_path, tokens, env) == -1)
+							{
+								perror("Error");
+								free(full_path);
+								free_command(tokens);
+							}
+						}
+						else
+							printf("%s: not found\n", tokens[0]);
+						exit(0);
 					}
 				}
 				else
 					wait(&status);
 				free(tokens);
 			}
+			free(buffer);
+			buffer = NULL;
 		}
 		return (0);
 }
