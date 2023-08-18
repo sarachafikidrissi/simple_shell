@@ -22,7 +22,9 @@ int main(int ac, char **av, char **env)
 		if (byte_readed == EOF)
 			handle_EOF(buffer);
 		else if (*buffer == '\n')
-			free(buffer);
+		{
+			continue;
+		}
 		else
 			execute(buffer, env);
 		free(buffer);
