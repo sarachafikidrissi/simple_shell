@@ -27,6 +27,7 @@ int main(int ac, char **av, char **env)
 		}
 		else
 			execute(buffer, env);
+		free(buffer);
 		buffer = NULL;
 	}
 	return (0);

@@ -1,9 +1,9 @@
 #include "main.h"
 /**
- * split_buffer - Splits a buffer into tokens.
- * @buffer: The buffer to be split.
+ * split_buffer - A function that Splits a buffer into tokens.
+ * @buffer: buffer to be split.
  *
- * Return: A double pointer to an array of tokens.
+ * Return: double pointer to an array of tokens or NULL
  */
 char **split_buffer(char *buffer)
 {
@@ -11,6 +11,8 @@ char **split_buffer(char *buffer)
 	int i = 0;
 
 	tokens = malloc(sizeof(char *) * 1024);
+	if (tokens == NULL)
+		return (NULL);
 	token = strtok(buffer, " \t\n");
 	while (token != NULL)
 	{
