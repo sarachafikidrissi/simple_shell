@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <stddef.h>
 struct stat st;
 extern char **environ;
 
@@ -18,6 +19,10 @@ void print_env(char **env);
 void execute(char *buffer, char **env);
 /*======== shell.c =======*/
 int main(int ac, char **av, char **env);
+
+/*==== function that reads an input line =====*/
+ssize_t _Mygetline(char **commandline, size_t *lineSize, FILE *scanner);
+
 /*=== full_path and environement=====*/
 char *get_full_path(char *input);
 char *get_env(char *str);
