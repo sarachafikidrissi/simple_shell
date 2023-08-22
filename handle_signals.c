@@ -1,8 +1,9 @@
+#include "main.h"
 /**
- * handle - Handles a signal by displaying a prompt.
+ * handle_signal - Handles a signal ctrl+C by displaying a prompt.
  * @signals: The signal.
  */
-void handle(int signals)
+void handle_signal(int signals)
 {
 	(void) signals;
 	write(STDOUT_FILENO, "\nHELL_SHELL>> ", 14);
