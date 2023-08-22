@@ -19,7 +19,7 @@ int main(int ac, char **av, char **env)
 		if (isatty(STDIN_FILENO))
 			write(1, "HELL_SHELL>> ", 13);
 		signal(SIGINT, handle_signal);
-		byte_readed =  _Mygetline(&buffer, &size_buf, stdin);
+		byte_readed =  getline(&buffer, &size_buf, stdin);
 		if (byte_readed == EOF)
 			handle_EOF(buffer);
 		else if (*buffer == '\n' || strspn(buffer, " \t\r\n") == strlen(buffer))
