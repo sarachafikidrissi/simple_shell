@@ -1,15 +1,21 @@
 #include "main.h"
 /**
  * execute - execution of the command.
- * @tokens: array of string
  * @buffer:  pointer to a string.
  * @env: double pointer to an array of env.
  */
-void execute(char **tokens, char **env)
+void execute(char *buffer, char **env)
 {
-	char *full_path;
-	int status = 0, pid, exit_status;
+	struct stat st;
+	char **tokens = NULL, *full_path;
+	int status = 0, pid;
 
+	buffer[_strlen(buffer) - 1] = '\0';
+	tokens = split_buffer(buffer);
+	if (_strcmp(tokens[0], "exit") != 0)
+		exit_shell(tokens);
+	else if (_strcmp(tokens[0], "env") != 0)
+		print_env(env);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -38,13 +44,6 @@ void execute(char **tokens, char **env)
 		}
 	}
 	else
-	{wait(&status);
-		if (WIFEXITED(status))
-		{exit_status = WEXITSTATUS(status);
-
-			if (exit_status != 0)
-				exit(exit_status);
-		}
-	}
+		wait(&status);
 	free(tokens);
 }

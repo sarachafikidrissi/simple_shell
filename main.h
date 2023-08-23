@@ -8,7 +8,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <stddef.h>
-struct stat st;
 extern char **environ;
 
 /*=== a function to exit the shell====*/
@@ -18,7 +17,7 @@ void handle_signal(int signals);
 /*==== a function to print environ====*/
 void print_env(char **env);
 /*=== function to execute a command====*/
-void execute(char **tokens, char **env);
+void execute(char *buffer, char **env);
 /*======== shell.c =======*/
 int main(int ac, char **av, char **env);
 
