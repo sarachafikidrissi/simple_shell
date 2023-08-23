@@ -8,7 +8,7 @@
  */
 int main(int ac, char **av, char **env)
 {
-	char *buffer = NULL;
+	char *buffer = NULL, **tokens = NULL;
 	size_t size_buf = 0;
 	int byte_readed = 0;
 	(void)ac;
@@ -27,7 +27,16 @@ int main(int ac, char **av, char **env)
 			continue;
 		}
 		else
-			execute(buffer, env);
+		{
+			buffer[_strlen(buffer) - 1] = '\0';
+			tokens = split_buffer(buffer);
+			if (_strcmp(tokens[0], "exit") != 0)
+				exit_shell(tokens);
+			else if (_strcmp(tokens[0], "env") != 0)
+				print_env(env);
+			else
+				execute(tokens, env);
+		}
 		free(buffer);
 		buffer = NULL;
 	}
