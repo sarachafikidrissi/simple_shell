@@ -13,16 +13,16 @@ extern char **environ;
 /*=== a function to exit the shell====*/
 void exit_shell(char **tokens);
 /*=== a fuction to handle the signals====*/
-//void handle_signal(int signals);
+void handle_signal(int signals);
 /*==== a function to print environ====*/
 void print_env(char **env);
 /*=== function to execute a command====*/
 void execute(char *buffer, char **env);
 /*======== shell.c =======*/
-//int main(int ac, char **av, char **env);
+int main(int ac, char **av, char **env);
 
 /*==== function that reads an input line =====*/
-//ssize_t _Mygetline(char **commandline, size_t *lineSize, FILE *scanner);
+ssize_t _Mygetline(char **commandline, size_t *lineSize, FILE *scanner);
 
 /*=== full_path and environement=====*/
 char *get_full_path(char *input);
