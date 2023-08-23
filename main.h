@@ -22,7 +22,7 @@ void execute(char *buffer, char **env);
 //int main(int ac, char **av, char **env);
 
 /*==== function that reads an input line =====*/
-ssize_t _Mygetline(char **commandline, size_t *lineSize, FILE *scanner);
+//ssize_t _Mygetline(char **commandline, size_t *lineSize, FILE *scanner);
 
 /*=== full_path and environement=====*/
 char *get_full_path(char *input);
