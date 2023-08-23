@@ -19,7 +19,7 @@ void print_env(char **env);
 /*=== function to execute a command====*/
 void execute(char *buffer, char **env);
 /*======== shell.c =======*/
-int main(int ac, char **av, char **env);
+//int main(int ac, char **av, char **env);
 
 /*==== function that reads an input line =====*/
 ssize_t _Mygetline(char **commandline, size_t *lineSize, FILE *scanner);
