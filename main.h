@@ -13,7 +13,7 @@ extern char **environ;
 /*=== a function to exit the shell====*/
 void exit_shell(char **tokens);
 /*=== a fuction to handle the signals====*/
-void handle_signal(int signals);
+//void handle_signal(int signals);
 /*==== a function to print environ====*/
 void print_env(char **env);
 /*=== function to execute a command====*/
