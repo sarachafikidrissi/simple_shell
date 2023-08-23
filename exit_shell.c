@@ -11,7 +11,7 @@ void exit_shell(char **tokens)
 	if (tokens[1] == NULL)
 	{
 		free_command(tokens);
-		exit(EXIT_SUCCESS);
+		exit(2);
 	}
 
 	status = atoi(tokens[1]);
